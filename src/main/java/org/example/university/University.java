@@ -1,4 +1,6 @@
-package org.example;
+package org.example.university;
+
+import org.example.enums.StudyProfile;
 
 public class University {
     private String id;
@@ -8,6 +10,26 @@ public class University {
     private StudyProfile mainProfile;
 
     public University() {
+    }
+
+    public String getId() {
+        return id;
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getShortName() {
+        return shortName;
+    }
+
+    public int getYearOfFoundation() {
+        return yearOfFoundation;
+    }
+
+    public StudyProfile getMainProfile() {
+        return mainProfile;
     }
 
     @Override
@@ -37,18 +59,22 @@ public class University {
             university.fullName = fullName;
             return this;
         }
+
         public Builder setShortName(String shortName) {
             university.shortName = shortName;
             return this;
         }
+
         public Builder setYearOfFoundation(int yearOfFoundation) {
             university.yearOfFoundation = yearOfFoundation;
             return this;
         }
+
         public Builder setMainProfile(StudyProfile mainProfile) {
             university.mainProfile = mainProfile;
             return this;
         }
+
         public University build() {
             return university;
         }

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.students;
 
 public class Student {
     private String fullName;
@@ -7,6 +7,22 @@ public class Student {
     private float avgExamScore;
 
     public Student() {
+    }
+
+    public String getFullName() {
+        return fullName;
+    }
+
+    public String getUniversityId() {
+        return universityId;
+    }
+
+    public int getCurrentCourseNumber() {
+        return currentCourseNumber;
+    }
+
+    public float getAvgExamScore() {
+        return avgExamScore;
     }
 
     @Override
@@ -51,3 +67,5 @@ public class Student {
         }
     }
 }
+
+
