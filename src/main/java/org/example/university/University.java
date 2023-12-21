@@ -1,12 +1,17 @@
 package org.example.university;
 
+import com.google.gson.annotations.SerializedName;
 import org.example.enums.StudyProfile;
 
 public class University {
     private String id;
+    @SerializedName("full_name")
     private String fullName;
+    @SerializedName("short_name")
     private String shortName;
+    @SerializedName("year_of_foundation")
     private int yearOfFoundation;
+    @SerializedName("main_profile")
     private StudyProfile mainProfile;
 
     public University() {
