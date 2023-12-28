@@ -2,12 +2,16 @@ package org.example;
 
 import com.google.gson.Gson;
 import org.example.enums.StudentComparators;
+import org.example.enums.StudyProfile;
 import org.example.enums.UniversityComparators;
 import org.example.students.Student;
 import org.example.students.StudentsComp;
 import org.example.university.University;
 import org.example.university.UniversityComp;
 
+import java.io.IOException;
+import java.nio.file.Path;
+import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
@@ -29,6 +33,7 @@ public class Main {
 
         List<University> universities1 = FileWork.readUniversities();
         UniversityComp comp2 = EnumWork.getMyComparatorUniversity(UniversityComparators.UNIVERSITY_COMPARATOR_ID);
+
 
         //сортировка коллекции
         universities1 = universities1.stream().sorted(comp2).collect(Collectors.toList());
@@ -89,5 +94,26 @@ public class Main {
             University university1 = JsonUtil.deserializeUniversity(serUni);
             System.out.println(university1);
         });
+
+        //Создадим коллекцию названий всех Университетов
+        List<String> nameUniversity = new ArrayList<>();
+        for (int i = 0; i < universities1.size(); i++) {
+            nameUniversity.add(universities1.get(i).getFullName());
+        }
+
+        //Создадим коллекцию средних оценок по предметам
+        List<Double> avgGrade = new ArrayList<>();
+        for (int i = 0; i < students1.size(); i++) {
+            avgGrade.add((double) students1.get(i).getAvgExamScore());
+        }
+
+        System.out.println("---");
+
+
+        //Задание "27.8. Проект"
+        UtilStudentUniversities.statisticsMethod(students1, universities1).forEach(System.out::println);
+        String path = "statistic.xls";
+        XlsWriter.excelFile(UtilStudentUniversities.statisticsMethod(students1, universities1), path);
+
     }
 }
