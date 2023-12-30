@@ -74,8 +74,8 @@ public class XlsWriter {
                 }
             }
         }
-        try {
-            FileOutputStream fos = new FileOutputStream(path);
+
+        try (FileOutputStream fos = new FileOutputStream(path)) {
             wb.write(fos);
         } catch (IOException e) {
             e.printStackTrace();
