@@ -12,15 +12,18 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class FileWork {
+    private static final Logger logger = Logger.getLogger(FileWork.class.getName());
 
     private FileWork() {
     }
 
     public static List<Student> readStudents() {
         List<Student> listStudents = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Java/Project24_7/src/main/resources/universityInfo.xlsx")) {
+        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Project24_7/src/main/resources/universityInfo.xlsx")) {
             XSSFWorkbook sheets = new XSSFWorkbook(fis);
             XSSFSheet students = sheets.getSheet("Студенты");
             Iterator<Row> rowIterator = students.rowIterator();
@@ -36,14 +39,15 @@ public class FileWork {
                 listStudents.add(student);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, "File read error!", e);
         }
+        logger.log(Level.INFO, "Students added to 'listStudents' collection: " + listStudents);
         return listStudents;
     }
 
     public static List<University> readUniversities() {
         List<University> listUniversities = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Java/Project24_7/src/main/resources/universityInfo.xlsx")) {
+        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Project24_7/src/main/resources/universityInfo.xlsx")) {
             XSSFWorkbook sheets = new XSSFWorkbook(fis);
             XSSFSheet universities = sheets.getSheet("Университеты");
             Iterator<Row> rowIterator = universities.rowIterator();
@@ -60,8 +64,9 @@ public class FileWork {
                 listUniversities.add(university);
             }
         } catch (IOException e) {
-            System.out.println(e.getMessage());
+            logger.log(Level.SEVERE, "File read error!", e);
         }
+        logger.log(Level.INFO, "Students added to 'listUniversities' collection: " + listUniversities);
         return listUniversities;
     }
 }

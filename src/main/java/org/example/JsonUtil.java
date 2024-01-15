@@ -6,12 +6,14 @@ import com.google.gson.reflect.TypeToken;
 import org.example.students.Student;
 import org.example.university.University;
 
-import java.io.*;
+
 import java.lang.reflect.Type;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 public class JsonUtil {
+    private static final Logger logger = Logger.getLogger(JsonUtil.class.getName());
 
     private JsonUtil() {
     }
@@ -20,6 +22,7 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String strStudent = gson.toJson(student);
+        logger.log(Level.INFO, "Object 'Student' serialized: " + strStudent);
         return strStudent;
     }
 
@@ -27,6 +30,7 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String strUniversity = gson.toJson(university);
+        logger.log(Level.INFO, "Object 'University' serialized: " + strUniversity);
         return strUniversity;
     }
 
@@ -34,6 +38,7 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String strListStudent = gson.toJson(list);
+        logger.log(Level.INFO, "Object 'List<Student>' serialized: " + strListStudent);
         return strListStudent;
     }
 
@@ -41,6 +46,7 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         String strListUniversity = gson.toJson(list);
+        logger.log(Level.INFO, "Object 'List<University>' serialized: " + strListUniversity);
         return strListUniversity;
     }
 
@@ -48,6 +54,7 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         Student student = gson.fromJson(str, Student.class);
+        logger.log(Level.INFO, "Object 'Student' deserialized: " + student);
         return student;
     }
 
@@ -55,22 +62,27 @@ public class JsonUtil {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
         University university = gson.fromJson(str, University.class);
+        logger.log(Level.INFO, "Object 'University' deserialized: " + university);
         return university;
     }
 
     public static List<Student> deserializeListStudent(String str) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
-        Type listType = new TypeToken<List<Student>>() {}.getType();
+        Type listType = new TypeToken<List<Student>>() {
+        }.getType();
         List<Student> listStudents = gson.fromJson(str, listType);
+        logger.log(Level.INFO, "Object 'List<Student>' deserialized: " + listStudents);
         return listStudents;
     }
 
     public static List<University> deserializeListUniversity(String str) {
         GsonBuilder builder = new GsonBuilder();
         Gson gson = builder.setPrettyPrinting().create();
-        Type listType = new TypeToken<List<University>>() {}.getType();
-        List<University> universities = gson.fromJson(str, listType);
-        return universities;
+        Type listType = new TypeToken<List<University>>() {
+        }.getType();
+        List<University> listUniversities = gson.fromJson(str, listType);
+        logger.log(Level.INFO, "Object 'List<University>' deserialized: " + listUniversities);
+        return listUniversities;
     }
 }

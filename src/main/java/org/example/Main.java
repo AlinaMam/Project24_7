@@ -9,6 +9,7 @@ import org.example.students.StudentsComp;
 import org.example.university.University;
 import org.example.university.UniversityComp;
 
+
 import java.io.IOException;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -23,7 +24,7 @@ public class Main {
         List<Student> students1 = FileWork.readStudents();
         StudentsComp comp1 = EnumWork.getMyComparatorStudent(StudentComparators.STUDENT_COMPARATOR_FULL_NAME);
 
-        //сортировка коллекции
+        //сортировка коллекции students1
         students1 = students1.stream().sorted(comp1).collect(Collectors.toList());
 
         //вывод в консоль всех элементов коллекции
@@ -34,8 +35,7 @@ public class Main {
         List<University> universities1 = FileWork.readUniversities();
         UniversityComp comp2 = EnumWork.getMyComparatorUniversity(UniversityComparators.UNIVERSITY_COMPARATOR_ID);
 
-
-        //сортировка коллекции
+        //сортировка коллекции universities1
         universities1 = universities1.stream().sorted(comp2).collect(Collectors.toList());
 
         //вывод в консоль всех элементов коллекции
@@ -43,77 +43,9 @@ public class Main {
 
         System.out.println("---");
 
-        System.out.println("\nСериализация\n");
-
-        //Сериализация
-        String studentsAfterSerialize = JsonUtil.serializeListStudent(students1);
-        System.out.println(studentsAfterSerialize);
-
-        System.out.println("---");
-
-        String universitiesAfterSerialize = JsonUtil.serializeListUniversity(universities1);
-        System.out.println(universitiesAfterSerialize);
-
-        System.out.println("\nДесериализация:\n");
-
-        //Десериализация
-        List<Student> students2 = JsonUtil.deserializeListStudent(studentsAfterSerialize);
-        students2.stream().forEach(System.out::println);
-
-        System.out.println("---");
-
-        List<University> universities2 = JsonUtil.deserializeListUniversity(universitiesAfterSerialize);
-        universities2.stream().forEach(System.out::println);
-
-        System.out.println("\nСравнение кол-ва объектов до и после сериализации:\n");
-        long count1 = students1.stream().count();
-        System.out.println("Кол-во объектов в students до сериализации: " + count1);
-        long count2 = students2.stream().count();
-        System.out.println("Кол-во объектов в students после десериализации: " + count2);
-
-        System.out.println("---");
-
-        long count3 = universities1.stream().count();
-        System.out.println("Кол-во объектов в universities до сериализации: " + count3);
-        long count4 = universities2.stream().count();
-        System.out.println("Кол-во объектов в universities до сериализации: " + count4);
-
-        //Сериализация отдельных объектов в исходной коллекции:
-        System.out.println("Выполним сериализацию и десериализацию элементов students1 в stream: ");
-        students1.forEach(student -> {
-            String serStud = JsonUtil.serializeStudent(student);
-            System.out.println(serStud);
-            Student student1 = JsonUtil.deserializeStudent(serStud);
-            System.out.println(student1);
-        });
-
-        System.out.println("Выполним сериализацию и десериализацию элементов universities1 в stream: ");
-        universities1.forEach(university -> {
-            String serUni = JsonUtil.serializeUniversity(university);
-            System.out.println(serUni);
-            University university1 = JsonUtil.deserializeUniversity(serUni);
-            System.out.println(university1);
-        });
-
-        //Создадим коллекцию названий всех Университетов
-        List<String> nameUniversity = new ArrayList<>();
-        for (int i = 0; i < universities1.size(); i++) {
-            nameUniversity.add(universities1.get(i).getFullName());
-        }
-
-        //Создадим коллекцию средних оценок по предметам
-        List<Double> avgGrade = new ArrayList<>();
-        for (int i = 0; i < students1.size(); i++) {
-            avgGrade.add((double) students1.get(i).getAvgExamScore());
-        }
-
-        System.out.println("---");
-
-
         //Задание "27.8. Проект"
         UtilStudentUniversities.statisticsMethod(students1, universities1).forEach(System.out::println);
         String path = "statistic.xls";
         XlsWriter.excelFile(UtilStudentUniversities.statisticsMethod(students1, universities1), path);
-
     }
 }
