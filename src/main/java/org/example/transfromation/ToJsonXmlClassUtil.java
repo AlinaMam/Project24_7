@@ -9,13 +9,17 @@ import org.example.university.University;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -37,13 +41,20 @@ public class ToJsonXmlClassUtil {
         xmlClass.setStatistics(UtilStudentUniversities.statisticsMethod(students, universities));
         List<Statistics> statistics = xmlClass.getStatistics();
 
-        //устанавливаем дату
-
-        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
-        String dateString = formater.format(new Date());
-        Date date = null;
+        //Создание директории
+        String nameFile = "json " + LocalDate.now();
         try {
-            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateString);
+            Files.createDirectory(Path.of("/Users/alina/Desktop/Java/Project24_7/src/main/java/org/example/jsonReqs/"));
+        } catch (IOException e) {
+           logger.error("Problem to create directory!");
+        }
+
+        //устанавливаем дату
+        Date date = new Date();
+        SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String strDate = formatter.format(date);
+        try {
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(strDate);
             xmlClass.setDate(date);
         } catch (ParseException e) {
             logger.error("Error to create date!");
@@ -57,7 +68,7 @@ public class ToJsonXmlClassUtil {
 
         String json = gson.toJson(xmlClass);
         try {
-            Files.write(Paths.get("src/main/java/org/example/jsonReqs/reg_2024_01_27.json"), json.getBytes(), StandardOpenOption.CREATE);
+            Files.write(Paths.get("src/main/java/org/example/jsonReqs/" + nameFile + ".json"), json.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
             logger.error("Error to write in file.");
             e.printStackTrace();
