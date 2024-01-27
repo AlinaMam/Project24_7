@@ -38,16 +38,17 @@ public class ToJsonXmlClassUtil {
         List<Statistics> statistics = xmlClass.getStatistics();
 
         //устанавливаем дату
-        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
-        String dateTime = sdf.format(new Date());
 
+        SimpleDateFormat formater = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+        String dateString = formater.format(new Date());
+        Date date = null;
         try {
-            xmlClass.setDate(new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").parse(dateTime));
+            date = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").parse(dateString);
+            xmlClass.setDate(date);
         } catch (ParseException e) {
             logger.error("Error to create date!");
             e.printStackTrace();
         }
-
 
         //создание объекта GSON
         GsonBuilder gsonBuilder = new GsonBuilder();
