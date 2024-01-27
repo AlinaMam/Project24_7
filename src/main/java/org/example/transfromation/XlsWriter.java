@@ -1,19 +1,18 @@
-package org.example;
+package org.example.transfromation;
 
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.example.classesForUtil.Statistics;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-
-import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.text.DecimalFormat;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class XlsWriter {
-    private static final Logger logger = Logger.getLogger(XlsWriter.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(XlsWriter.class);
 
     public static void excelFile(List<Statistics> list, String path) {
         Workbook wb = new XSSFWorkbook();
@@ -83,9 +82,10 @@ public class XlsWriter {
         try (FileOutputStream fos = new FileOutputStream(path)) {
             wb.write(fos);
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "File read error!", e);
+            logger.error("File read error!");
+            e.printStackTrace();
         }
-        logger.log(Level.INFO, "Created excel file with statistics: " + path);
+        logger.info("Created excel file with statistics: " + path);
     }
 }
 

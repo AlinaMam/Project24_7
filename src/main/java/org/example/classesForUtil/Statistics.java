@@ -1,9 +1,16 @@
-package org.example;
+package org.example.classesForUtil;
 
 import org.example.enums.StudyProfile;
 
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+
+@XmlAccessorType(XmlAccessType.FIELD)
 public class Statistics {
+    @XmlElement(name = "universityProfile")
     private StudyProfile studyProfile;
+    @XmlElement(name = "avgScore")
     private double avgGrade;
     private int countStudents;
     private int countUniversities;

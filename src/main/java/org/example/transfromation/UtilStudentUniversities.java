@@ -1,19 +1,17 @@
-package org.example;
+package org.example.transfromation;
 
+import org.example.classesForUtil.Statistics;
 import org.example.enums.StudyProfile;
 import org.example.students.Student;
 import org.example.university.University;
-import org.example.university.UniversityComp;
-
 
 import java.math.BigDecimal;
 import java.math.MathContext;
 import java.math.RoundingMode;
-import java.text.DecimalFormat;
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 public class UtilStudentUniversities {
     public static List<Statistics> statisticsMethod(List<Student> students, List<University> universities) {

@@ -1,4 +1,4 @@
-package org.example;
+package org.example.transfromation;
 
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
@@ -6,24 +6,25 @@ import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 import org.example.enums.StudyProfile;
 import org.example.students.Student;
 import org.example.university.University;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+
 
 public class FileWork {
-    private static final Logger logger = Logger.getLogger(FileWork.class.getName());
+    private static final Logger logger = LoggerFactory.getLogger(FileWork.class);
 
     private FileWork() {
     }
 
     public static List<Student> readStudents() {
         List<Student> listStudents = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Project24_7/src/main/resources/universityInfo.xlsx")) {
+        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Java/Project24_7/src/main/resources/universityInfo.xlsx")) {
             XSSFWorkbook sheets = new XSSFWorkbook(fis);
             XSSFSheet students = sheets.getSheet("Студенты");
             Iterator<Row> rowIterator = students.rowIterator();
@@ -39,15 +40,15 @@ public class FileWork {
                 listStudents.add(student);
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "File read error!", e);
+            logger.error("File read error");
         }
-        logger.log(Level.INFO, "Students added to 'listStudents' collection: " + listStudents);
+        logger.info("Students added to 'listStudents' collection.");
         return listStudents;
     }
 
     public static List<University> readUniversities() {
         List<University> listUniversities = new ArrayList<>();
-        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Project24_7/src/main/resources/universityInfo.xlsx")) {
+        try (FileInputStream fis = new FileInputStream("/Users/alina/Desktop/Java/Project24_7/src/main/resources/universityInfo.xlsx")) {
             XSSFWorkbook sheets = new XSSFWorkbook(fis);
             XSSFSheet universities = sheets.getSheet("Университеты");
             Iterator<Row> rowIterator = universities.rowIterator();
@@ -64,9 +65,9 @@ public class FileWork {
                 listUniversities.add(university);
             }
         } catch (IOException e) {
-            logger.log(Level.SEVERE, "File read error!", e);
+            logger.error("File read error!");
         }
-        logger.log(Level.INFO, "Students added to 'listUniversities' collection: " + listUniversities);
+        logger.info("Students added to 'listUniversities' collection.");
         return listUniversities;
     }
 }
