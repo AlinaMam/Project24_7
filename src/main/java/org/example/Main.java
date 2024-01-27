@@ -12,6 +12,7 @@ import org.example.university.UniversityComp;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.text.ParseException;
 import java.util.Date;
 import java.util.List;
 import java.util.logging.Level;
@@ -59,7 +60,7 @@ public class Main {
         //Финальное задание 29.5
         //заполнение файла xmlReqs/req.xml
         XmlClass xmlClass = new XmlClass(FileWork.readStudents(), FileWork.readUniversities(), UtilStudentUniversities.statisticsMethod(FileWork.readStudents(), FileWork.readUniversities()), new Date());
-        XmlUtil.createXMLstructure(xmlClass);
+//        XmlUtil.createXMLstructure(xmlClass);
 
         //заполнение файла jsonReqs/reg_2024_01_27.json
         ToJsonXmlClassUtil.createJsonStructure(xmlClass);

@@ -1,5 +1,5 @@
-[
-  [
+{
+  "students": [
     {
       "full_name": "Иванов И. А.",
       "university_id": "0002-high",
@@ -67,7 +67,7 @@
       "avg_exam_score": 4.7
     }
   ],
-  [
+  "universities": [
     {
       "ID": "0001-high",
       "full_name": "Московский Выдуманный Университет",
@@ -118,13 +118,13 @@
       "main_profile": "MATHEMATICS"
     }
   ],
-  [
+  "statistics": [
     {
-      "studyProfile": "MATHEMATICS",
-      "avgGrade": 0.0,
-      "countStudents": 0,
-      "countUniversities": 1,
-      "nameUniversity": "[Казанский Университет Вычислений]"
+      "studyProfile": "PHYSICS",
+      "avgGrade": 4.54,
+      "countStudents": 8,
+      "countUniversities": 2,
+      "nameUniversity": "[Московский Выдуманный Университет, Московский Придуманный Институт]"
     },
     {
       "studyProfile": "MEDICINE",
@@ -134,18 +134,19 @@
       "nameUniversity": "[Московский Государственный Медицинский Университет, Тамбовский Университет Медицины, Самарский Медицинский Институт]"
     },
     {
-      "studyProfile": "PHYSICS",
-      "avgGrade": 4.54,
-      "countStudents": 8,
-      "countUniversities": 2,
-      "nameUniversity": "[Московский Выдуманный Университет, Московский Придуманный Институт]"
-    },
-    {
       "studyProfile": "LINGUISTICS",
       "avgGrade": 0.0,
       "countStudents": 0,
       "countUniversities": 1,
       "nameUniversity": "[Воронежский Литературно-Переводческий Университет]"
+    },
+    {
+      "studyProfile": "MATHEMATICS",
+      "avgGrade": 0.0,
+      "countStudents": 0,
+      "countUniversities": 1,
+      "nameUniversity": "[Казанский Университет Вычислений]"
     }
-  ]
-]
+  ],
+  "date": "Jan 27, 2024, 7:13:15 AM"
+}

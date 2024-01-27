@@ -13,12 +13,17 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.nio.file.StandardOpenOption;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 
 public class ToJsonXmlClassUtil {
     private static final Logger logger = LoggerFactory.getLogger(FileWork.class);
+
     public static void createJsonStructure(XmlClass xmlClass) {
         //получение списка студентов
         xmlClass.setStudents(FileWork.readStudents());
@@ -32,19 +37,24 @@ public class ToJsonXmlClassUtil {
         xmlClass.setStatistics(UtilStudentUniversities.statisticsMethod(students, universities));
         List<Statistics> statistics = xmlClass.getStatistics();
 
+        //устанавливаем дату
+        SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd hh-mm-ss");
+        String dateTime = sdf.format(new Date());
+
+        try {
+            xmlClass.setDate(new SimpleDateFormat("yyyy-MM-dd hh-mm-ss").parse(dateTime));
+        } catch (ParseException e) {
+            logger.error("Error to create date!");
+            e.printStackTrace();
+        }
+
+
         //создание объекта GSON
         GsonBuilder gsonBuilder = new GsonBuilder();
         gsonBuilder.setPrettyPrinting();
         Gson gson = gsonBuilder.create();
 
-        //объединение 3х листов
-        List<Object> allLists = new ArrayList<>();
-        allLists.add(students);
-        allLists.add(universities);
-        allLists.add(statistics);
-
-        //преобразование в JSON и запись в файл
-        String json = gson.toJson(allLists);
+        String json = gson.toJson(xmlClass);
         try {
             Files.write(Paths.get("src/main/java/org/example/jsonReqs/reg_2024_01_27.json"), json.getBytes(), StandardOpenOption.CREATE);
         } catch (IOException e) {
