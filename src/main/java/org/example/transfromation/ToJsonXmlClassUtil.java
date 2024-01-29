@@ -9,7 +9,6 @@ import org.example.university.University;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
@@ -18,9 +17,6 @@ import java.nio.file.StandardOpenOption;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -47,6 +43,7 @@ public class ToJsonXmlClassUtil {
             Files.createDirectory(Path.of("/Users/alina/Desktop/Java/Project24_7/src/main/java/org/example/jsonReqs/"));
         } catch (IOException e) {
            logger.error("Problem to create directory!");
+           e.printStackTrace();
         }
 
         //устанавливаем дату
