@@ -20,9 +20,10 @@ public class XmlUtil {
             marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, Boolean.TRUE);
             marshaller.marshal(xmlClass, new FileOutputStream("src/main/java/org/example/xmlReqs/req.xml"));
         } catch (JAXBException e) {
-            logger.error("Error to create xml.");
+            logger.error("Error to create xml!");
             e.printStackTrace();
         } catch (FileNotFoundException e) {
+            logger.error("File read error!");
             e.printStackTrace();
         }
     }
